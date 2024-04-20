@@ -1,5 +1,5 @@
 import { Provider } from '@nestjs/common';
-import { LocalStorageService } from './providers/local';
+import { LocalStorageService } from './providers/local.provider';
 import { STORAGE_SERVICE } from './storage.constants';
 
 function storageProviderFactory() {
