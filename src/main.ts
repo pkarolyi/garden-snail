@@ -4,7 +4,9 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { AllExceptionFilter } from './all-exceptions.filter';
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -14,6 +16,8 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI,
   });
+  app.useGlobalFilters(new AllExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.useBodyParser('application/octet-stream');
   await app.listen(3000);
 }
