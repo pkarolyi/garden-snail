@@ -9,5 +9,3 @@ export type PutArtifactRO = {
 };
 
 export type GetArtifactRO = StreamableFile;
-
-export type HeadArtifactRO = void;
