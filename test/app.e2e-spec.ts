@@ -4,8 +4,6 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { Test, TestingModule } from "@nestjs/testing";
-import { AllExceptionFilter } from "src/all-exceptions.filter";
-import { HttpExceptionFilter } from "src/http-exception.filter";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { AppModule } from "./../src/app.module";
 
@@ -18,13 +16,9 @@ describe("AppController (e2e)", () => {
     }).compile();
 
     app = moduleFixture.createNestApplication<NestFastifyApplication>(
-      new FastifyAdapter(),
+      new FastifyAdapter()
     );
-    app.enableVersioning({
-      type: VersioningType.URI,
-    });
-    app.useGlobalFilters(new AllExceptionFilter());
-    app.useGlobalFilters(new HttpExceptionFilter());
+    app.enableVersioning({ type: VersioningType.URI });
     app.useBodyParser("application/octet-stream");
 
     await app.init();
