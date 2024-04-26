@@ -1,49 +1,49 @@
-import { ArgumentMetadata } from '@nestjs/common';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { ArtifactQueryTeamPipe } from './artifacts.pipe';
+import { ArgumentMetadata } from "@nestjs/common";
+import { beforeEach, describe, expect, it } from "vitest";
+import { ArtifactQueryTeamPipe } from "./artifacts.pipe";
 
-describe('ArtifactQueryTeamPipe', () => {
+describe("ArtifactQueryTeamPipe", () => {
   let artifactQueryTeamPipe: ArtifactQueryTeamPipe;
   const metadata: ArgumentMetadata = {
-    type: 'query',
-    data: '',
+    type: "query",
+    data: "",
   };
 
   beforeEach(() => {
     artifactQueryTeamPipe = new ArtifactQueryTeamPipe();
   });
 
-  it('should return the teamId if passed teamId', () => {
+  it("should return the teamId if passed teamId", () => {
     const query = {
-      teamId: 'test-teamId',
+      teamId: "test-teamId",
     };
     expect(artifactQueryTeamPipe.transform(query, metadata)).toEqual(
-      'test-teamId',
+      "test-teamId",
     );
   });
 
-  it('should return the slug if passed slug', () => {
+  it("should return the slug if passed slug", () => {
     const query = {
-      slug: 'test-slugTeamId',
+      slug: "test-slugTeamId",
     };
     expect(artifactQueryTeamPipe.transform(query, metadata)).toEqual(
-      'test-slugTeamId',
+      "test-slugTeamId",
     );
   });
 
-  it('should return the teamId if passed both teamId and slug', () => {
+  it("should return the teamId if passed both teamId and slug", () => {
     const query = {
-      teamId: 'test-teamId',
-      slug: 'test-slugTeamId',
+      teamId: "test-teamId",
+      slug: "test-slugTeamId",
     };
     expect(artifactQueryTeamPipe.transform(query, metadata)).toEqual(
-      'test-teamId',
+      "test-teamId",
     );
   });
 
-  it('should throw on invalid data', () => {
+  it("should throw on invalid data", () => {
     const query = {
-      invalid: 'data',
+      invalid: "data",
     };
     expect(() => artifactQueryTeamPipe.transform(query, metadata)).toThrow();
   });

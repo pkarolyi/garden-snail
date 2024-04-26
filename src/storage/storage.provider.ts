@@ -1,6 +1,6 @@
-import { Provider } from '@nestjs/common';
-import { LocalStorageService } from './providers/local.provider';
-import { STORAGE_SERVICE } from './storage.constants';
+import { Provider } from "@nestjs/common";
+import { LocalStorageService } from "./providers/local.provider";
+import { STORAGE_SERVICE } from "./storage.constants";
 
 function storageProviderFactory() {
   return new LocalStorageService();

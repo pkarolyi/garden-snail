@@ -1,7 +1,7 @@
-import { StreamableFile } from '@nestjs/common';
+import { StreamableFile } from "@nestjs/common";
 
 export type StatusRO = {
-  status: 'disabled' | 'enabled' | 'over_limit' | 'paused';
+  status: "disabled" | "enabled" | "over_limit" | "paused";
 };
 
 export type PutArtifactRO = {

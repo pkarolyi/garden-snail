@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { StorageModule } from 'src/storage/storage.module';
-import { ArtifactsController } from './artifacts.controller';
+import { Module } from "@nestjs/common";
+import { StorageModule } from "src/storage/storage.module";
+import { ArtifactsController } from "./artifacts.controller";
 
 @Module({
   controllers: [ArtifactsController],

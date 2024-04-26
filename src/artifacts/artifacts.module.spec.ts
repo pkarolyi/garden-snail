@@ -1,11 +1,11 @@
-import { Test } from '@nestjs/testing';
-import { StorageModule } from 'src/storage/storage.module';
-import { describe, expect, it } from 'vitest';
-import { ArtifactsController } from './artifacts.controller';
-import { ArtifactsModule } from './artifacts.module';
+import { Test } from "@nestjs/testing";
+import { StorageModule } from "src/storage/storage.module";
+import { describe, expect, it } from "vitest";
+import { ArtifactsController } from "./artifacts.controller";
+import { ArtifactsModule } from "./artifacts.module";
 
-describe('ArtifactsModule', () => {
-  it('should compile the module', async () => {
+describe("ArtifactsModule", () => {
+  it("should compile the module", async () => {
     const module = await Test.createTestingModule({
       imports: [ArtifactsModule],
     }).compile();

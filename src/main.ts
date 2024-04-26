@@ -1,11 +1,11 @@
 /* c8 ignore start */
-import { ValidationPipe, VersioningType } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { ValidationPipe, VersioningType } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
 import {
   FastifyAdapter,
   NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import { AppModule } from './app.module';
+} from "@nestjs/platform-fastify";
+import { AppModule } from "./app.module";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -14,7 +14,7 @@ async function bootstrap() {
   );
   app.enableVersioning({ type: VersioningType.URI });
   app.useGlobalPipes(new ValidationPipe());
-  app.useBodyParser('application/octet-stream');
+  app.useBodyParser("application/octet-stream");
   await app.listen(3000);
 }
 bootstrap();
