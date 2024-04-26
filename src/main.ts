@@ -15,6 +15,6 @@ async function bootstrap() {
   app.enableVersioning({ type: VersioningType.URI });
   app.useGlobalPipes(new ValidationPipe());
   app.useBodyParser("application/octet-stream");
-  await app.listen(3000);
+  await app.listen(3000, "0.0.0.0");
 }
 bootstrap();
