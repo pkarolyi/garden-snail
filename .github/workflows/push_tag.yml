@@ -1,8 +1,8 @@
-name: Build, Test and Publish edge
+name: Build, Test and Publish tagged version
 
 on:
   push:
-    branches: ["main"]
+    tags: ["v**"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -93,8 +93,8 @@ jobs:
         run: docker compose build
       - name: Test API with turborepo
         run: docker compose run test
-  publish-edge-image:
-    name: Build and Push 'edge' to Dockerhub
+  publish-tagged-image:
+    name: Build and Push 'x.y.z' to Dockerhub
     runs-on: ubuntu-22.04
     needs: [build, lint, test, test-e2e, test-integration]
     steps:
@@ -112,7 +112,7 @@ jobs:
         id: meta
         with:
           images: pkarolyi/garden-snail
-          tags: type=edge,branch=main
+          tags: type=semver,pattern={{version}}
       - name: Build and push image to Dockerhub
         uses: docker/build-push-action@v5
         with:
