@@ -7,4 +7,5 @@ node_modules
 .gitignore
 .nvmrc
 Dockerfile
+Dockerfile.test
 README.md
