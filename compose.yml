@@ -1,0 +1,10 @@
+services:
+  garden-snail:
+    build: .
+    ports:
+      - "3000:3000"
+  test:
+    build:
+      dockerfile: Dockerfile.test
+    depends_on:
+      - garden-snail

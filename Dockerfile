@@ -11,10 +11,9 @@ RUN apk --no-cache add g++ make py3-pip
 WORKDIR /garden-snail
 
 COPY package.json pnpm-lock.yaml ./
-COPY . .
-
 RUN pnpm install --frozen-lockfile
 
+COPY . .
 RUN pnpm build
 
 # ---
@@ -32,6 +31,6 @@ RUN pnpm install --frozen-lockfile
 COPY --from=builder --chown=node:node /garden-snail/dist ./dist
 
 EXPOSE 3000
-CMD ["node", "dist/main"]
+ENTRYPOINT ["node", "dist/main"]
 
 
