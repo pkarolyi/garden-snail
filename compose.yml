@@ -5,6 +5,6 @@ services:
       - "3000:3000"
   test:
     build:
-      dockerfile: Dockerfile.test
+      context: integration
     depends_on:
       - garden-snail

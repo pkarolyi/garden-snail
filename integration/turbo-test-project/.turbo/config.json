@@ -1,0 +1,5 @@
+{
+  "token": "TEST_TOKEN_NOT_SECRET",
+  "apiurl": "http://garden-snail:3000",
+  "teamid": "team_testing"
+}

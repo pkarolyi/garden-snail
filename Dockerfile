@@ -20,9 +20,13 @@ RUN pnpm build
 
 FROM base AS runner
 
+# https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+RUN apk --no-cache add tini
+
 WORKDIR /garden-snail
 
-COPY package.json pnpm-lock.yaml ./
+RUN chown -R node:node .
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 
 # with NODE_ENV=production pnpm will not install devDependencies 
 ENV NODE_ENV=production
@@ -30,7 +34,6 @@ RUN pnpm install --frozen-lockfile
 
 COPY --from=builder --chown=node:node /garden-snail/dist ./dist
 
+USER node
 EXPOSE 3000
-ENTRYPOINT ["node", "dist/main"]
-
-
+ENTRYPOINT ["/sbin/tini", "node", "dist/main"]

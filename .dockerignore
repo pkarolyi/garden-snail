@@ -1,11 +1,16 @@
 blobs
 coverage
 dist
+integration
 node_modules
+test
+**/*.spec.ts
 .dockerignore
 .eslintrc.js
 .gitignore
 .nvmrc
+compose.yml
 Dockerfile
 Dockerfile.test
 README.md
+vitest.config.ts
