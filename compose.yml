@@ -1,10 +1,19 @@
 services:
   garden-snail:
-    build: .
+    build:
+      context: .
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
     ports:
       - "3000:3000"
   test:
     build:
       context: integration
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
     depends_on:
       - garden-snail

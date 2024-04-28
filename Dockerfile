@@ -25,15 +25,13 @@ RUN apk --no-cache add tini
 
 WORKDIR /garden-snail
 
-RUN chown -R node:node .
-COPY --chown=node:node package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 
 # with NODE_ENV=production pnpm will not install devDependencies 
 ENV NODE_ENV=production
 RUN pnpm install --frozen-lockfile
 
-COPY --from=builder --chown=node:node /garden-snail/dist ./dist
+COPY --from=builder /garden-snail/dist ./dist
 
-USER node
 EXPOSE 3000
 ENTRYPOINT ["/sbin/tini", "node", "dist/main"]
