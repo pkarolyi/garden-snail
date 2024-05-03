@@ -5,6 +5,10 @@ export default defineConfig({
   test: {
     globals: true,
     root: "./",
+    env: {
+      STORAGE_PROVIDER: "local",
+      LOCAL_STORAGE_PATH: "blobs",
+    },
     exclude: [...configDefaults.exclude, "integration/*"],
     coverage: {
       exclude: [
@@ -12,7 +16,6 @@ export default defineConfig({
         "integration/*",
         "test/*",
         ".eslintrc.js",
-        "**/*.module.ts",
         "**/*.constants.ts",
       ],
     },

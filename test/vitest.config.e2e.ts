@@ -6,6 +6,10 @@ export default defineConfig({
     include: ["**/*.e2e-spec.ts"],
     globals: true,
     root: "./",
+    env: {
+      STORAGE_PROVIDER: "local",
+      LOCAL_STORAGE_PATH: "blobs",
+    },
   },
   plugins: [swc.vite()],
 });
