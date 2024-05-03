@@ -8,8 +8,9 @@ const configurationSchema = z
       S3_ACCESS_KEY_ID: z.string(),
       S3_SECRET_ACCESS_KEY: z.string(),
       S3_SESSION_TOKEN: z.string().optional(),
-      S3_REGION: z.string().optional(),
+      S3_REGION: z.string().default("us-east-1"),
       S3_FORCE_PATH_STYLE: z.coerce.boolean().default(false),
+      S3_ENDPOINT: z.string().optional(),
     }),
     z.object({
       STORAGE_PROVIDER: z.literal("local"),
@@ -35,6 +36,7 @@ const configurationSchema = z
             },
             region: data.S3_REGION,
             forcePathStyle: data.S3_FORCE_PATH_STYLE,
+            endpoint: data.S3_ENDPOINT,
           },
         },
   );
