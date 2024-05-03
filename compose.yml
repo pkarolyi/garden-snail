@@ -6,6 +6,9 @@ services:
         - type=gha
       cache_to:
         - type=gha,mode=max
+    environment:
+      - STORAGE_PROVIDER=local
+      - LOCAL_STORAGE_PATH=blobs
     ports:
       - "3000:3000"
   test:
