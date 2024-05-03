@@ -17,6 +17,6 @@ jobs:
   deploy:
     uses: ./.github/workflows/deploy.yml
     needs: [build, test]
+    secrets: inherit
     with:
       tags-policy: type=semver,pattern={{version}}
-      secrets: inherit
