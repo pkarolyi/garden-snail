@@ -1,5 +1,5 @@
 import { S3Client } from "@aws-sdk/client-s3";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ConfigurationSchema } from "src/config/configuration";
 import { Readable } from "stream";
@@ -9,12 +9,14 @@ import { StorageDriver } from "./storage.interface";
 
 @Injectable()
 export class StorageService {
+  private readonly logger = new Logger(StorageService.name);
   private readonly driver: StorageDriver;
 
   constructor(
     readonly configService: ConfigService<ConfigurationSchema, true>,
   ) {
     const storageConfig = configService.get("storage", { infer: true });
+    this.logger.debug(`storageConfig: ${JSON.stringify(storageConfig)}`);
 
     if (storageConfig.provider === "local") {
       const { basePath } = storageConfig;
@@ -33,14 +35,17 @@ export class StorageService {
   }
 
   write(team: string, hash: string, contents: Readable): Promise<void> {
+    this.logger.debug(`write team: ${team} hash: ${hash}`);
     return this.driver.write(team, hash, contents);
   }
 
   read(team: string, hash: string): Promise<Readable> {
+    this.logger.debug(`read team: ${team} hash: ${hash}`);
     return this.driver.read(team, hash);
   }
 
   exists(team: string, hash: string): Promise<boolean> {
+    this.logger.debug(`exists team: ${team} hash: ${hash}`);
     return this.driver.exists(team, hash);
   }
 }

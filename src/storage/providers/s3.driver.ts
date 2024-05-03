@@ -4,12 +4,14 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { Readable } from "stream";
 import { StorageDriver } from "../storage.interface";
 
 @Injectable()
 export class S3StorageDriver implements StorageDriver {
+  private readonly logger = new Logger(S3StorageDriver.name);
+
   constructor(
     private readonly bucket: string,
     private readonly s3Client: S3Client,
@@ -21,6 +23,7 @@ export class S3StorageDriver implements StorageDriver {
       Bucket: this.bucket,
       Key: `${team}/${hash}`,
     };
+    this.logger.debug(`write params: ${JSON.stringify(params)}`);
     const upload = new Upload({ client: this.s3Client, params });
     await upload.done();
   }
@@ -30,6 +33,7 @@ export class S3StorageDriver implements StorageDriver {
       Bucket: this.bucket,
       Key: `${team}/${hash}`,
     };
+    this.logger.debug(`read params: ${JSON.stringify(params)}`);
     const getCommand = new GetObjectCommand(params);
     const response = await this.s3Client.send(getCommand);
     return response.Body as Readable;
@@ -40,6 +44,7 @@ export class S3StorageDriver implements StorageDriver {
       Bucket: this.bucket,
       Key: `${team}/${hash}`,
     };
+    this.logger.debug(`exists params: ${JSON.stringify(params)}`);
     const headCommand = new HeadObjectCommand(params);
     try {
       await this.s3Client.send(headCommand);
