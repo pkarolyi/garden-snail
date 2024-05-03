@@ -1,16 +1,30 @@
+import { ConfigModule } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
 import { describe, expect, it } from "vitest";
-import { LocalStorageService } from "./providers/local.provider";
-import { STORAGE_SERVICE } from "./storage.constants";
 import { StorageModule } from "./storage.module";
+import { StorageService } from "./storage.service";
+
+const testConfig = {
+  storage: {
+    provider: "local",
+    basePath: "blobs",
+  },
+};
 
 describe("StorageModule", () => {
   it("should compile the module", async () => {
     const module = await Test.createTestingModule({
-      imports: [StorageModule],
+      imports: [
+        StorageModule,
+        ConfigModule.forRoot({
+          ignoreEnvFile: true,
+          ignoreEnvVars: true,
+          load: [() => testConfig],
+        }),
+      ],
     }).compile();
 
     expect(module).toBeDefined();
-    expect(module.get(STORAGE_SERVICE)).toBeInstanceOf(LocalStorageService);
+    expect(module.get(StorageService)).toBeInstanceOf(StorageService);
   });
 });

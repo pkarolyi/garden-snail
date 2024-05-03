@@ -1,11 +1,15 @@
 import { StreamableFile } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
-import { STORAGE_SERVICE } from "src/storage/storage.constants";
-import { StorageService } from "src/storage/storage.interface";
-import { StorageModule } from "src/storage/storage.module";
+import { StorageService } from "src/storage/storage.service";
 import { Readable } from "stream";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ArtifactsController } from "./artifacts.controller";
+
+const testConfig = {
+  provider: "local",
+  basePath: "blobs",
+};
 
 describe("ArtifactsController", () => {
   let artifactsController: ArtifactsController;
@@ -14,12 +18,20 @@ describe("ArtifactsController", () => {
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [ArtifactsController],
-      imports: [StorageModule],
+      providers: [
+        StorageService,
+        {
+          provide: ConfigService,
+          useValue: {
+            get: vi.fn(() => testConfig),
+          },
+        },
+      ],
     }).compile();
 
     artifactsController =
       moduleRef.get<ArtifactsController>(ArtifactsController);
-    storageService = moduleRef.get<StorageService>(STORAGE_SERVICE);
+    storageService = moduleRef.get<StorageService>(StorageService);
   });
 
   describe("getStatus", () => {

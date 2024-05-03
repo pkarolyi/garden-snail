@@ -4,7 +4,6 @@ import {
   Get,
   Head,
   HttpCode,
-  Inject,
   NotFoundException,
   Param,
   Post,
@@ -12,17 +11,14 @@ import {
   Query,
   StreamableFile,
 } from "@nestjs/common";
-import { STORAGE_SERVICE } from "src/storage/storage.constants";
-import { StorageService } from "src/storage/storage.interface";
+import { StorageService } from "src/storage/storage.service";
 import { Readable } from "stream";
 import { GetArtifactRO, PutArtifactRO, StatusRO } from "./artifacts.interface";
 import { ArtifactQueryTeamPipe } from "./artifacts.pipe";
 
 @Controller({ path: "artifacts", version: "8" })
 export class ArtifactsController {
-  constructor(
-    @Inject(STORAGE_SERVICE) private readonly storageService: StorageService,
-  ) {}
+  constructor(private readonly storageService: StorageService) {}
 
   @Get("status")
   getStatus(): StatusRO {

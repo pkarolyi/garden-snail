@@ -1,12 +1,7 @@
 import { Readable } from "stream";
 
-export type Meta = {
-  size: number;
-  taskDurationMs: number;
-};
-
-export interface StorageService {
+export interface StorageDriver {
   write(team: string, hash: string, contents: Readable): Promise<void>;
-  read(team: string, key: string): Promise<Readable>;
-  exists(team: string, key: string): Promise<boolean>;
+  read(team: string, hash: string): Promise<Readable>;
+  exists(team: string, hash: string): Promise<boolean>;
 }

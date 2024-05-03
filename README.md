@@ -20,7 +20,7 @@ node dist/main
 
 ## Notes
 
-The `1.0.0` release is working and is compatible with the latest turborepo release (`1.12.4` tested).
+The `1.1.0` release is working and is compatible with the latest turborepo releases. Check the integration tests on the latest [workflow run](https://github.com/pkarolyi/garden-snail/actions/).
 
 This version **does not include any authorization or rate limiting functionality**. It is intended for internal deployments in organizations with external access controls.
 
@@ -31,4 +31,4 @@ These are the things I will be working on in the coming weeks in no particular o
 - Authorization
 - Rate limiting
 - More providers
-  - S3
+  - Based on requests

@@ -1,10 +1,16 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { ArtifactsModule } from "./artifacts/artifacts.module";
-import { StorageModule } from "./storage/storage.module";
+import { validate } from "./config/configuration";
 
 @Module({
-  imports: [ArtifactsModule, StorageModule],
-  controllers: [],
-  providers: [],
+  imports: [
+    ArtifactsModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      validate,
+    }),
+  ],
 })
 export class AppModule {}

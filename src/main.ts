@@ -1,5 +1,5 @@
 /* c8 ignore start */
-import { ValidationPipe, VersioningType } from "@nestjs/common";
+import { VersioningType } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import {
   FastifyAdapter,
@@ -13,8 +13,8 @@ async function bootstrap() {
     new FastifyAdapter({ bodyLimit: 1024 * 1024 * 1024 }), // 1GiB limit
   );
   app.enableVersioning({ type: VersioningType.URI });
-  app.useGlobalPipes(new ValidationPipe());
   app.useBodyParser("application/octet-stream");
   await app.listen(3000, "0.0.0.0");
 }
+
 bootstrap();
