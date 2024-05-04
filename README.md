@@ -6,6 +6,18 @@ Garden Snail is a self-hosted [Remote Cache](https://turbo.build/repo/docs/core-
 
 The easiest way to get started is to use the published [Docker image](https://hub.docker.com/r/pkarolyi/garden-snail). It runs the remote cache server listening on port 3000.
 
+```sh
+docker run -e STORAGE_PROVIDER=local -e LOCAL_STORAGE_PATH=/blobs -v "$(pwd)"/blobs:/blobs -p 3000:3000 pkarolyi/garden-snail
+```
+
+You can also build and run the application yourself, you will need NodeJS `20.12.2` and pnpm `9.0.6`:
+
+```sh
+pnpm install
+pnpm build
+node dist/main
+```
+
 ### Environment variables
 
 ```sh
@@ -25,18 +37,6 @@ S3_REGION=
 S3_SESSION_TOKEN=
 S3_FORCE_PATH_STYLE=
 S3_ENDPOINT=
-```
-
-```sh
-docker run -e STORAGE_PROVIDER=local -e LOCAL_STORAGE_PATH=/blobs -v "$(pwd)"/blobs:/blobs -p 3000:3000 pkarolyi/garden-snail
-```
-
-You can also build and run the application yourself, you will need NodeJS `20.12.2` and pnpm `9.0.6`:
-
-```sh
-pnpm install
-pnpm build
-node dist/main
 ```
 
 ## Notes

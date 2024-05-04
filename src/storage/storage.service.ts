@@ -16,7 +16,6 @@ export class StorageService {
     readonly configService: ConfigService<ConfigurationSchema, true>,
   ) {
     const storageConfig = configService.get("storage", { infer: true });
-    this.logger.debug(`storageConfig: ${JSON.stringify(storageConfig)}`);
 
     if (storageConfig.provider === "local") {
       const { basePath } = storageConfig;
