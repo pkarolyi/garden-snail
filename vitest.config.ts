@@ -6,6 +6,7 @@ export default defineConfig({
     globals: true,
     root: "./",
     env: {
+      AUTH_TOKENS: "token",
       STORAGE_PROVIDER: "local",
       LOCAL_STORAGE_PATH: "blobs",
     },

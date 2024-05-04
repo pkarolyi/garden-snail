@@ -21,7 +21,10 @@ node dist/main
 ### Environment variables
 
 ```sh
-# Set it to 's3' or 'local'
+# required: comma separated list of valid tokens
+AUTH_TOKENS=
+
+# required: 's3' or 'local'
 STORAGE_PROVIDER=
 
 # Required if provider is local
@@ -41,15 +44,14 @@ S3_ENDPOINT=
 
 ## Notes
 
-The `1.1.0` release is working and is compatible with the latest turborepo releases. Check the integration tests on the latest [workflow run](https://github.com/pkarolyi/garden-snail/actions/).
+Check the integration tests on the [workflow runs](https://github.com/pkarolyi/garden-snail/actions/) for a given tag to check for compatibility.
 
-This version **does not include any authorization or rate limiting functionality**. It is intended for internal deployments in organizations with external access controls.
+The `1.1.0` release and releases prior to that **do not include any authorization or rate limiting functionality**.
 
 ## Roadmap
 
 These are the things I will be working on in the coming weeks in no particular order:
 
-- Authorization
 - Rate limiting
 - More providers
   - Based on requests

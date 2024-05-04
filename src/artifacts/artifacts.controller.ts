@@ -11,13 +11,16 @@ import {
   Put,
   Query,
   StreamableFile,
+  UseGuards,
 } from "@nestjs/common";
 import { StorageService } from "src/storage/storage.service";
 import { Readable } from "stream";
+import { ArtifactsGuard } from "./artifacts.guard";
 import { GetArtifactRO, PutArtifactRO, StatusRO } from "./artifacts.interface";
 import { ArtifactQueryTeamPipe } from "./artifacts.pipe";
 
 @Controller({ path: "artifacts", version: "8" })
+@UseGuards(ArtifactsGuard)
 export class ArtifactsController {
   private readonly logger = new Logger(ArtifactsController.name);
 

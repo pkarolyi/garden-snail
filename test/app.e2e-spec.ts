@@ -33,6 +33,7 @@ describe("AppController (e2e)", () => {
     const result = await app.inject({
       method: "GET",
       url: "/v8/artifacts/status",
+      headers: { authorization: "Bearer token" },
     });
     expect(result.statusCode).toEqual(200);
     expect(result.json()).toEqual({ status: "enabled" });

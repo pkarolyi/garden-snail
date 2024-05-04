@@ -7,6 +7,7 @@ services:
       cache_to:
         - type=gha,mode=max
     environment:
+      - AUTH_TOKENS=TEST_TOKEN_NOT_SECRET
       - STORAGE_PROVIDER=local
       - LOCAL_STORAGE_PATH=blobs
     ports:
