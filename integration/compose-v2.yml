@@ -1,7 +1,7 @@
 services:
   garden-snail:
     build:
-      context: .
+      context: ..
       cache_from:
         - type=gha
       cache_to:
@@ -12,9 +12,9 @@ services:
       - LOCAL_STORAGE_PATH=blobs
     ports:
       - "3000:3000"
-  test:
+  test-v2:
     build:
-      context: integration
+      context: v2
       cache_from:
         - type=gha
       cache_to:

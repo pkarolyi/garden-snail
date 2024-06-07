@@ -55,13 +55,13 @@ jobs:
         run: pnpm install
       - name: Test e2e
         run: pnpm test:e2e
-  test-integration:
-    name: Test (integration)
+  test-integration-v1:
+    name: Test (integration, turbo@^1)
     runs-on: ubuntu-22.04
     needs: [lint, test, test-e2e]
     strategy:
       matrix:
-        turbo_version: ["^1.10", "^1.11", "^1.12", "^1.13", "latest"]
+        turbo_version: ["^1.10", "^1.11", "^1.12", "^1.13"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -70,6 +70,24 @@ jobs:
       - name: Expose GitHub Runtime for caching
         uses: crazy-max/ghaction-github-runtime@v3
       - name: Build docker images
-        run: docker compose build
+        run: docker compose -f integration/compose-v1.yml build
       - name: Test API with turborepo
-        run: docker compose run test ${{ matrix.turbo_version }}
+        run: docker compose -f integration/compose-v1.yml run test-v1 ${{ matrix.turbo_version }}
+  test-integration-v2:
+    name: Test (integration, turbo@^2)
+    runs-on: ubuntu-22.04
+    needs: [lint, test, test-e2e]
+    strategy:
+      matrix:
+        turbo_version: ["^2.0", "latest"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Expose GitHub Runtime for caching
+        uses: crazy-max/ghaction-github-runtime@v3
+      - name: Build docker images
+        run: docker compose -f integration/compose-v2.yml build
+      - name: Test API with turborepo
+        run: docker compose -f integration/compose-v2.yml run test-v2 ${{ matrix.turbo_version }}

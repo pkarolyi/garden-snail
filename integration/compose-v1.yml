@@ -1,0 +1,23 @@
+services:
+  garden-snail:
+    build:
+      context: ..
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
+    environment:
+      - AUTH_TOKENS=TEST_TOKEN_NOT_SECRET
+      - STORAGE_PROVIDER=local
+      - LOCAL_STORAGE_PATH=blobs
+    ports:
+      - "3000:3000"
+  test-v1:
+    build:
+      context: v1
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
+    depends_on:
+      - garden-snail
