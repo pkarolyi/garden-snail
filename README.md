@@ -62,7 +62,7 @@ turbo run build --api="https://my-server.example.com" --team "team_xxxx" --token
 
 If you see "remote caching enabled" printed that means that it is using the cache. Also you should see some logs from the remote cache server.
 
-After running the build once, delete the local cache files (`node_modules/.cache` and if you are using NextJs then also `.next`) and running the build again without any changes. You should see "FULL TURBO" printed as Turborepo uses your remote cache to download the artifacts instead of building them again.
+After running the build once, delete the local cache files (`node_modules/.cache` for `turbo@1` and `.turbo/cache` for `turbo@2` and if you are using NextJs then also `.next`) and running the build again without any changes. You should see "FULL TURBO" printed as Turborepo uses your remote cache to download the artifacts instead of building them again.
 
 ### Long-term setup
 
