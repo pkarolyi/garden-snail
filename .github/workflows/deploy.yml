@@ -30,7 +30,7 @@ jobs:
           images: pkarolyi/garden-snail
           tags: ${{ inputs.tags-policy }}
       - name: Build and push image to Dockerhub
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
