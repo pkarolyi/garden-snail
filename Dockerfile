@@ -1,6 +1,6 @@
-FROM node:20.12.2-alpine3.18 AS base
+FROM node:20.15.1-alpine3.20 AS base
 
-RUN npm install -g --ignore-scripts pnpm@9.0.6
+RUN npm install -g --ignore-scripts pnpm@9.5.0
 
 # ---
 
