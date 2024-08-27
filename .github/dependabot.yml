@@ -13,15 +13,28 @@ updates:
         update-types:
           - "minor"
           - "patch"
+      major:
+        applies-to: version-updates
+        update-types:
+          - "major"
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
     commit-message:
       prefix: "fix(dependabot)"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     commit-message:
       prefix: "chore(dependabot)"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
