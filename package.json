@@ -33,12 +33,12 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@nestjs/cli": "10.4.4",
+    "@nestjs/cli": "10.4.5",
     "@nestjs/schematics": "10.1.4",
     "@nestjs/testing": "10.4.1",
     "@swc/cli": "0.4.0",
-    "@swc/core": "1.7.18",
-    "@types/node": "20.16.1",
+    "@swc/core": "1.7.22",
+    "@types/node": "20.16.3",
     "@types/supertest": "6.0.2",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
