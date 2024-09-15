@@ -1,6 +1,6 @@
 # Garden Snail
 
-![Compatible with turborepo 1.10, 1.11, 1.12, 1.13](https://img.shields.io/badge/turborepo-1.10_1.11_1.12_1.13-blue?style=for-the-badge&logo=turborepo&logoColor=white) ![Compatible with turborepo 2.0](https://img.shields.io/badge/turborepo-2.0-blue?style=for-the-badge&logo=turborepo&logoColor=white)
+![Compatible with turborepo 1.10, 1.11, 1.12, 1.13](https://img.shields.io/badge/turborepo-1.10_1.11_1.12_1.13-blue?style=for-the-badge&logo=turborepo&logoColor=white) ![Compatible with turborepo 2.0, 2.1](https://img.shields.io/badge/turborepo-2.0_2.1-blue?style=for-the-badge&logo=turborepo&logoColor=white)
 
 Garden Snail is a self-hosted [Remote Cache](https://turbo.build/repo/docs/core-concepts/remote-caching#self-hosting) server for [Turborepo](https://turbo.build/repo) written in [NestJS](https://nestjs.com/). It serves as a drop-in replacement for Vercel's remote cache and supports storing the artifacts locally or in a s3 compatible storage.
 
@@ -40,10 +40,10 @@ LOCAL_STORAGE_PATH=
 
 # required if provider is s3
 S3_BUCKET=
-S3_ACCESS_KEY_ID=
-S3_SECRET_ACCESS_KEY=
 
 # optional if provider is s3
+S3_ACCESS_KEY_ID=
+S3_SECRET_ACCESS_KEY=
 S3_REGION=
 S3_SESSION_TOKEN=
 S3_FORCE_PATH_STYLE=
@@ -84,7 +84,7 @@ TURBO_REMOTE_CACHE_TIMEOUT=
 
 If you used Vercel's remote cache before, remove `.turbo/config.json` to make sure those settings won't interfere with the custom remote cache.
 
-In the current version (`1.2.0`) any valid AUTH_TOKEN has acess to any team, so **don't use teams for access control**.
+In the current version any valid AUTH_TOKEN has acess to any team, so **don't use teams for access control**.
 
 ## Storage Options
 
@@ -135,7 +135,7 @@ You will need to create the storage bucket and set up a user with the correct pe
 }
 ```
 
-Then you will need to specify the connection parameters for the [S3 client](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-s3/). The storage bucket (`S3_BUCKET`) and the credentials of the user (`S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY`) are required.
+Then you will need to specify the connection parameters for the [S3 client](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-s3/). The storage bucket (`S3_BUCKET`) is required. The credentials of the user (`S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY`) are optional, but you will need to set them if you are not using an other method of providing access to the bucket.
 
 If using a more advanced or custom setup you may need to set the following environment variables too:
 
