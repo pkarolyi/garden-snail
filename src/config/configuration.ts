@@ -14,8 +14,8 @@ const configurationSchema = z
       z.object({
         STORAGE_PROVIDER: z.literal("s3"),
         S3_BUCKET: z.string(),
-        S3_ACCESS_KEY_ID: z.string(),
-        S3_SECRET_ACCESS_KEY: z.string(),
+        S3_ACCESS_KEY_ID: z.string().optional(),
+        S3_SECRET_ACCESS_KEY: z.string().optional(),
         S3_SESSION_TOKEN: z.string().optional(),
         S3_REGION: z.string().default("us-east-1"),
         S3_FORCE_PATH_STYLE: z.enum(["true", "false"]).default("false"),
@@ -53,6 +53,21 @@ const configurationSchema = z
   });
 
 export type ConfigurationSchema = z.infer<typeof configurationSchema>;
+
+export type S3KeyAuthCredentials = {
+  accessKeyId: string;
+  secretAccessKey: string;
+  sessionToken?: string;
+};
+
+export function isS3KeyAuthCredentials(
+  credentialConfig: any,
+): credentialConfig is S3KeyAuthCredentials {
+  return (
+    typeof credentialConfig.accessKeyId === "string" &&
+    typeof credentialConfig.secretAccessKey === "string"
+  );
+}
 
 export function validate(config: Record<string, unknown>) {
   return configurationSchema.parse(config);

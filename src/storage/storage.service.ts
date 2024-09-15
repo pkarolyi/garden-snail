@@ -1,7 +1,10 @@
 import { S3Client } from "@aws-sdk/client-s3";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ConfigurationSchema } from "src/config/configuration";
+import {
+  ConfigurationSchema,
+  isS3KeyAuthCredentials,
+} from "src/config/configuration";
 import { Readable } from "stream";
 import { LocalStorageDriver } from "./providers/local.driver";
 import { S3StorageDriver } from "./providers/s3.driver";
@@ -23,13 +26,23 @@ export class StorageService {
     } else if (storageConfig.provider === "s3") {
       const { bucket, credentials, region, forcePathStyle, endpoint } =
         storageConfig;
-      const s3Client = new S3Client({
-        credentials,
-        region,
-        forcePathStyle,
-        endpoint,
-      });
-      this.driver = new S3StorageDriver(bucket, s3Client);
+
+      if (isS3KeyAuthCredentials(credentials)) {
+        const s3Client = new S3Client({
+          credentials,
+          region,
+          forcePathStyle,
+          endpoint,
+        });
+        this.driver = new S3StorageDriver(bucket, s3Client);
+      } else {
+        const s3Client = new S3Client({
+          region,
+          forcePathStyle,
+          endpoint,
+        });
+        this.driver = new S3StorageDriver(bucket, s3Client);
+      }
     }
   }
 
