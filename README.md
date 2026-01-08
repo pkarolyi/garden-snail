@@ -160,6 +160,21 @@ docker run \
 pkarolyi/garden-snail
 ```
 
+## API Compatibility
+
+Garden Snail implements the Turborepo v8 remote cache API. The following endpoints are fully supported:
+
+| Endpoint | Method | Status |
+|----------|--------|--------|
+| `/v8/artifacts/status` | GET | Supported |
+| `/v8/artifacts/:hash` | GET | Supported |
+| `/v8/artifacts/:hash` | HEAD | Supported |
+| `/v8/artifacts/:hash` | PUT | Supported |
+| `/v8/artifacts/events` | POST | No-op (logs only) |
+| `/v8/artifacts` | POST | Returns 501 |
+
+The batch query endpoint (`POST /v8/artifacts`) is documented in Vercel's OpenAPI spec but **Turborepo does not actually use it**. The Rust implementation makes individual `HEAD` requests for cache existence checks instead of batch queries. Returning 501 does not affect compatibility with any tested Turborepo version.
+
 ## Notes
 
 - Check the integration tests on the [workflow runs](https://github.com/pkarolyi/garden-snail/actions/) for a given tag to check for compatibility.
