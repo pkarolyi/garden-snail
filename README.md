@@ -1,6 +1,6 @@
 # Garden Snail
 
-![Compatible with turborepo 1.10, 1.11, 1.12, 1.13](https://img.shields.io/badge/turborepo-1.10_1.11_1.12_1.13-blue?style=for-the-badge&logo=turborepo&logoColor=white) ![Compatible with turborepo 2.0, 2.1](https://img.shields.io/badge/turborepo-2.0_2.1-blue?style=for-the-badge&logo=turborepo&logoColor=white)
+![Compatible with turborepo 1.13](https://img.shields.io/badge/turborepo-1.13-blue?style=for-the-badge&logo=turborepo&logoColor=white) ![Compatible with turborepo 2.x](https://img.shields.io/badge/turborepo-2.x-blue?style=for-the-badge&logo=turborepo&logoColor=white)
 
 Garden Snail is a self-hosted [Remote Cache](https://turbo.build/repo/docs/core-concepts/remote-caching#self-hosting) server for [Turborepo](https://turbo.build/repo) written in [NestJS](https://nestjs.com/). It serves as a drop-in replacement for Vercel's remote cache and supports storing the artifacts locally or in a s3 compatible storage.
 
