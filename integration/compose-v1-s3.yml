@@ -1,0 +1,50 @@
+services:
+  localstack:
+    image: localstack/localstack:3
+    environment:
+      - SERVICES=s3
+      - DEBUG=0
+    healthcheck:
+      test: ["CMD", "awslocal", "s3", "ls"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  localstack-init:
+    image: localstack/localstack:3
+    depends_on:
+      localstack:
+        condition: service_healthy
+    entrypoint: ["awslocal", "--endpoint-url=http://localstack:4566", "s3", "mb", "s3://turborepo-cache"]
+
+  garden-snail:
+    build:
+      context: ..
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
+    environment:
+      - AUTH_TOKENS=TEST_TOKEN_NOT_SECRET
+      - STORAGE_PROVIDER=s3
+      - S3_BUCKET=turborepo-cache
+      - S3_REGION=us-east-1
+      - S3_ENDPOINT=http://localstack:4566
+      - S3_FORCE_PATH_STYLE=true
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    ports:
+      - "3000:3000"
+    depends_on:
+      localstack-init:
+        condition: service_completed_successfully
+
+  test-v1:
+    build:
+      context: v1
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
+    depends_on:
+      - garden-snail

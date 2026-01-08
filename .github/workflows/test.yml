@@ -85,3 +85,33 @@ jobs:
         run: docker compose -f integration/compose-v2.yml build
       - name: Test API with turborepo
         run: docker compose -f integration/compose-v2.yml run test-v2 ^2
+  test-integration-v1-s3:
+    name: Test (integration, turbo@1.13.4, S3)
+    runs-on: ubuntu-22.04
+    needs: [lint, test, test-e2e]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Expose GitHub Runtime for caching
+        uses: crazy-max/ghaction-github-runtime@v3
+      - name: Build docker images
+        run: docker compose -f integration/compose-v1-s3.yml build
+      - name: Test API with turborepo (S3 storage)
+        run: docker compose -f integration/compose-v1-s3.yml run test-v1 1.13.4
+  test-integration-v2-s3:
+    name: Test (integration, turbo@^2, S3)
+    runs-on: ubuntu-22.04
+    needs: [lint, test, test-e2e]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Expose GitHub Runtime for caching
+        uses: crazy-max/ghaction-github-runtime@v3
+      - name: Build docker images
+        run: docker compose -f integration/compose-v2-s3.yml build
+      - name: Test API with turborepo (S3 storage)
+        run: docker compose -f integration/compose-v2-s3.yml run test-v2 ^2
