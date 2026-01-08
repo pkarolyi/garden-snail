@@ -56,6 +56,7 @@ export class ArtifactsController {
   }
 
   @Put(":hash")
+  @HttpCode(202)
   async putArtifact(
     @Param("hash") hash: string,
     @Query(new ArtifactQueryTeamPipe()) team: string,
