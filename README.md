@@ -179,6 +179,17 @@ Garden Snail implements the Turborepo v8 remote cache API. The following endpoin
 
 The batch query endpoint (`POST /v8/artifacts`) is documented in Vercel's OpenAPI spec but **Turborepo does not actually use it**. The Rust implementation makes individual `HEAD` requests for cache existence checks instead of batch queries. Returning 501 does not affect compatibility with any tested Turborepo version.
 
+## Releases
+
+Releases are automated via [semantic-release](https://github.com/semantic-release/semantic-release) on every push to `main`, driven by [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `fix: ...` → patch release (e.g. `1.5.0` → `1.5.1`)
+- `feat: ...` → minor release (e.g. `1.5.1` → `1.6.0`)
+- a commit with a `BREAKING CHANGE:` footer → major release
+- anything else (`chore`, `docs`, `test`, `refactor`, ...) → no release
+
+Each release tags the Docker image with the new version plus `edge` and `latest`, so pinning to any of those keeps working.
+
 ## Notes
 
 - Check the integration tests on the [workflow runs](https://github.com/pkarolyi/garden-snail/actions/) for a given tag to check for compatibility.
