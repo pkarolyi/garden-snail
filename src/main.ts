@@ -6,11 +6,13 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
+import { validate } from "./config/configuration";
 
 async function bootstrap() {
+  const { server } = validate(process.env);
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ bodyLimit: 1024 * 1024 * 1024 }), // 1GiB limit
+    new FastifyAdapter({ bodyLimit: server.bodyLimit }),
   );
   app.enableVersioning({ type: VersioningType.URI });
   app.useBodyParser("application/octet-stream");
