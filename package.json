@@ -1,6 +1,6 @@
 {
   "name": "garden-snail",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "Turborepo remote cache server",
   "author": "Peter Karolyi <peter@karolyi.dev>",
   "private": true,
