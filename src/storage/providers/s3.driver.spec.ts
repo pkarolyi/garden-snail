@@ -13,9 +13,9 @@ vi.mock("@aws-sdk/client-s3", () => ({
 }));
 
 vi.mock("@aws-sdk/lib-storage", () => ({
-  Upload: vi.fn().mockImplementation(() => ({
-    done: mockUploadDone,
-  })),
+  Upload: vi.fn().mockImplementation(function () {
+    return { done: mockUploadDone };
+  }),
 }));
 
 describe("S3StorageDriver", () => {

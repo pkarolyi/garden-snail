@@ -13,8 +13,8 @@ describe("LocalStorageDriver", () => {
     localStorageDriver = new LocalStorageDriver(basePath);
   });
 
-  afterAll(() => {
-    fs.rm(path.join(basePath, team), {
+  afterAll(async () => {
+    await fs.rm(path.join(basePath, team), {
       recursive: true,
       force: true,
     });
@@ -35,8 +35,8 @@ describe("LocalStorageDriver", () => {
   describe("exists", () => {
     const hash = "existshash";
 
-    beforeAll(() => {
-      fs.writeFile(path.join(basePath, team, hash), "test content");
+    beforeAll(async () => {
+      await fs.writeFile(path.join(basePath, team, hash), "test content");
     });
 
     it("should return true if the given file exists", async () => {
@@ -56,8 +56,8 @@ describe("LocalStorageDriver", () => {
     const hash = "readhash";
     const content = "test content";
 
-    beforeAll(() => {
-      fs.writeFile(path.join(basePath, team, hash), content);
+    beforeAll(async () => {
+      await fs.writeFile(path.join(basePath, team, hash), content);
     });
 
     it("should return the contents", async () => {

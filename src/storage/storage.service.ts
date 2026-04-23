@@ -43,6 +43,11 @@ export class StorageService {
         });
         this.driver = new S3StorageDriver(bucket, s3Client);
       }
+    } else {
+      const _exhaustive: never = storageConfig;
+      throw new Error(
+        `Unsupported storage provider: ${(_exhaustive as { provider: string }).provider}`,
+      );
     }
   }
 
