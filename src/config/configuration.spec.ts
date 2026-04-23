@@ -43,7 +43,40 @@ describe("Configuration", () => {
           provider: validConfigurationLocal.STORAGE_PROVIDER,
           basePath: validConfigurationLocal.LOCAL_STORAGE_PATH,
         },
+        server: {
+          bodyLimit: 1024 * 1024 * 1024,
+        },
       });
+    });
+  });
+
+  describe("BODY_LIMIT", () => {
+    it("defaults to 1 GiB when unset", () => {
+      const configuration = validate(validConfigurationLocal);
+      expect(configuration.server.bodyLimit).toBe(1024 * 1024 * 1024);
+    });
+
+    it("accepts a custom positive integer (bytes)", () => {
+      const configuration = validate({
+        ...validConfigurationLocal,
+        BODY_LIMIT: "2147483648",
+      });
+      expect(configuration.server.bodyLimit).toBe(2147483648);
+    });
+
+    it("rejects non-numeric values", () => {
+      expect(() =>
+        validate({ ...validConfigurationLocal, BODY_LIMIT: "1gb" }),
+      ).toThrow();
+    });
+
+    it("rejects zero and negatives", () => {
+      expect(() =>
+        validate({ ...validConfigurationLocal, BODY_LIMIT: "0" }),
+      ).toThrow();
+      expect(() =>
+        validate({ ...validConfigurationLocal, BODY_LIMIT: "-1" }),
+      ).toThrow();
     });
   });
 
@@ -77,6 +110,9 @@ describe("Configuration", () => {
           region: validConfigurationS3.S3_REGION,
           endpoint: validConfigurationS3.S3_ENDPOINT,
           forcePathStyle: validConfigurationS3.S3_FORCE_PATH_STYLE === "true",
+        },
+        server: {
+          bodyLimit: 1024 * 1024 * 1024,
         },
       });
     });

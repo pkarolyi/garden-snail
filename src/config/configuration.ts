@@ -2,6 +2,8 @@ import { z } from "zod";
 
 const splitComma = (s: string) => s.split(",");
 
+const DEFAULT_BODY_LIMIT = 1024 * 1024 * 1024;
+
 const configurationSchema = z
   .intersection(
     z.object({
@@ -9,6 +11,21 @@ const configurationSchema = z
         .string()
         .transform(splitComma)
         .pipe(z.string().min(1).array()),
+      BODY_LIMIT: z
+        .string()
+        .optional()
+        .default(String(DEFAULT_BODY_LIMIT))
+        .transform((v, ctx) => {
+          const n = Number(v);
+          if (!Number.isInteger(n) || n <= 0) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: "BODY_LIMIT must be a positive integer (bytes)",
+            });
+            return z.NEVER;
+          }
+          return n;
+        }),
     }),
     z.union([
       z.object({
@@ -54,6 +71,7 @@ const configurationSchema = z
     return {
       storage,
       auth: { tokens: data.AUTH_TOKENS },
+      server: { bodyLimit: data.BODY_LIMIT },
     };
   });
 

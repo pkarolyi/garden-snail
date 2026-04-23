@@ -48,6 +48,10 @@ S3_REGION=
 S3_SESSION_TOKEN=
 S3_FORCE_PATH_STYLE=
 S3_ENDPOINT=
+
+# optional: maximum request body size in bytes for artifact uploads.
+# Applied to the underlying Fastify server. Defaults to 1073741824 (1 GiB).
+BODY_LIMIT=
 ```
 
 ## Configuring Turborepo to use your cache server
