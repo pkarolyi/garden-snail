@@ -70,13 +70,39 @@ describe("S3StorageDriver", () => {
       expect(result).toBe(true);
     });
 
-    it("should return false when object does not exist", async () => {
-      mockSend.mockRejectedValueOnce(new Error("NotFound"));
+    it("should return false when object does not exist (NotFound name)", async () => {
+      const notFound = Object.assign(new Error("Not Found"), {
+        name: "NotFound",
+      });
+      mockSend.mockRejectedValueOnce(notFound);
 
       const result = await driver.exists(team, hash);
 
       expect(mockSend).toHaveBeenCalledOnce();
       expect(result).toBe(false);
+    });
+
+    it("should return false when object does not exist (404 status)", async () => {
+      const notFound = Object.assign(new Error("Not Found"), {
+        $metadata: { httpStatusCode: 404 },
+      });
+      mockSend.mockRejectedValueOnce(notFound);
+
+      const result = await driver.exists(team, hash);
+
+      expect(mockSend).toHaveBeenCalledOnce();
+      expect(result).toBe(false);
+    });
+
+    it("should rethrow non-404 errors so they surface in logs", async () => {
+      const accessDenied = Object.assign(new Error("Access Denied"), {
+        name: "AccessDenied",
+        $metadata: { httpStatusCode: 403 },
+      });
+      mockSend.mockRejectedValueOnce(accessDenied);
+
+      await expect(driver.exists(team, hash)).rejects.toBe(accessDenied);
+      expect(mockSend).toHaveBeenCalledOnce();
     });
   });
 });

@@ -48,9 +48,27 @@ export class S3StorageDriver implements StorageDriver {
     const headCommand = new HeadObjectCommand(params);
     try {
       await this.s3Client.send(headCommand);
-    } catch {
-      return false;
+      return true;
+    } catch (error) {
+      if (isS3NotFoundError(error)) return false;
+      this.logger.error(
+        `exists failed for ${params.Key}: ${errorMessage(error)}`,
+        error instanceof Error ? error.stack : undefined,
+      );
+      throw error;
     }
-    return true;
   }
+}
+
+function isS3NotFoundError(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const e = error as {
+    name?: string;
+    $metadata?: { httpStatusCode?: number };
+  };
+  return e.name === "NotFound" || e.$metadata?.httpStatusCode === 404;
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
 }
