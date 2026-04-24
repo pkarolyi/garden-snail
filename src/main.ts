@@ -7,6 +7,7 @@ import {
 } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
 import { validate } from "./config/configuration";
+import { registerStreamingOctetStreamParser } from "./streaming-body";
 
 async function bootstrap() {
   const { server } = validate(process.env);
@@ -15,7 +16,7 @@ async function bootstrap() {
     new FastifyAdapter({ bodyLimit: server.bodyLimit }),
   );
   app.enableVersioning({ type: VersioningType.URI });
-  app.useBodyParser("application/octet-stream");
+  registerStreamingOctetStreamParser(app);
   await app.listen(3000, "0.0.0.0");
 }
 

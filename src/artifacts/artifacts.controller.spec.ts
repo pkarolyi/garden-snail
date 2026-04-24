@@ -92,20 +92,17 @@ describe("ArtifactsController", () => {
   describe("putArtifact", () => {
     it("should write the file", async () => {
       const contents = "test file contents";
+      const body = Readable.from(contents);
       const storageWrite = vi
         .spyOn(storageService, "write")
         .mockImplementation(() => Promise.resolve());
       const result = await artifactsController.putArtifact(
         "hash",
         "teamId",
-        Buffer.from(contents),
+        body,
       );
       expect(result).toEqual({ urls: ["teamId/hash"] });
-      expect(storageWrite).toBeCalledWith(
-        "teamId",
-        "hash",
-        expect.any(Readable),
-      );
+      expect(storageWrite).toBeCalledWith("teamId", "hash", body);
     });
   });
 

@@ -23,7 +23,7 @@ export class S3StorageDriver implements StorageDriver {
       Bucket: this.bucket,
       Key: `${team}/${hash}`,
     };
-    this.logger.debug(`write params: ${JSON.stringify(params)}`);
+    this.logger.debug(`write bucket: ${params.Bucket} key: ${params.Key}`);
     const upload = new Upload({ client: this.s3Client, params });
     await upload.done();
   }

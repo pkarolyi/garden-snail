@@ -6,6 +6,7 @@ import {
 import { Test, TestingModule } from "@nestjs/testing";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { AppModule } from "./../src/app.module";
+import { registerStreamingOctetStreamParser } from "./../src/streaming-body";
 
 describe("AppController (e2e)", () => {
   let app: NestFastifyApplication;
@@ -19,7 +20,7 @@ describe("AppController (e2e)", () => {
       new FastifyAdapter(),
     );
     app.enableVersioning({ type: VersioningType.URI });
-    app.useBodyParser("application/octet-stream");
+    registerStreamingOctetStreamParser(app);
 
     await app.init();
     await app.getHttpAdapter().getInstance().ready();
