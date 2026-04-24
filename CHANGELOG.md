@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/pkarolyi/garden-snail/compare/v1.5.2...v1.5.3) (2026-04-24)
+
+
+### Bug Fixes
+
+* surface non-404 S3 errors instead of masking as cache misses ([db94d9a](https://github.com/pkarolyi/garden-snail/commit/db94d9a8f77baf5726e22e867add31928d7d3959))
+
 ## [1.5.2](https://github.com/pkarolyi/garden-snail/compare/v1.5.1...v1.5.2) (2026-04-24)
 
 
