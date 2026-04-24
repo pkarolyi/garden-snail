@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/pkarolyi/garden-snail/compare/v1.5.1...v1.5.2) (2026-04-24)
+
+
+### Performance Improvements
+
+* stream PUT bodies to storage instead of buffering ([9297caa](https://github.com/pkarolyi/garden-snail/commit/9297caadfdb2bba6fc2ec3db0d7e1c27b628f04d))
+
 ## [1.5.1](https://github.com/pkarolyi/garden-snail/compare/v1.5.0...v1.5.1) (2026-04-23)
 
 
