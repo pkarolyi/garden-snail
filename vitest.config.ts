@@ -1,7 +1,13 @@
+import path from "path";
 import swc from "unplugin-swc";
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, "src"),
+    },
+  },
   test: {
     globals: true,
     root: "./",
@@ -10,7 +16,7 @@ export default defineConfig({
       STORAGE_PROVIDER: "local",
       LOCAL_STORAGE_PATH: "blobs",
     },
-    exclude: [...configDefaults.exclude, "integration/*"],
+    exclude: [...configDefaults.exclude, "dist/**", "integration/*"],
     coverage: {
       exclude: [
         ...configDefaults.exclude,
