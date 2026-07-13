@@ -1,3 +1,13 @@
+## [1.5.5](https://github.com/pkarolyi/garden-snail/compare/v1.5.4...v1.5.5) (2026-07-13)
+
+
+### Bug Fixes
+
+* adapt to typescript 6 and vitest 4 breaking changes ([f842dd0](https://github.com/pkarolyi/garden-snail/commit/f842dd031650ee8c21ce14cb7fb19a76586011dc))
+* bump node to 20.19.5 for vitest 4 require(esm) support ([d2b69b7](https://github.com/pkarolyi/garden-snail/commit/d2b69b79865d9822d22bb4316d511fc7c286c85b))
+* preserve swc dist layout with explicit stripLeadingPaths ([3aef44d](https://github.com/pkarolyi/garden-snail/commit/3aef44d588188b098a2b04f244253a461f43aeb4))
+* set explicit rootDir in tsconfig.build.json for typescript 6 ([64e8aeb](https://github.com/pkarolyi/garden-snail/commit/64e8aebb13ac535eda2fb7a3bf00e51d305380a3))
+
 ## [1.5.4](https://github.com/pkarolyi/garden-snail/compare/v1.5.3...v1.5.4) (2026-07-13)
 
 
