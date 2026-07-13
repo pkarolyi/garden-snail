@@ -18,7 +18,7 @@ docker run \
 pkarolyi/garden-snail
 ```
 
-You can also build and run the application yourself, you will need NodeJS `20.15.1` and pnpm `9.5.0`:
+You can also build and run the application yourself, you will need NodeJS `24.18.0` and pnpm `9.5.0`:
 
 ```sh
 pnpm install
