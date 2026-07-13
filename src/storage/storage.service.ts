@@ -23,7 +23,7 @@ export class StorageService {
     if (storageConfig.provider === "local") {
       const { basePath } = storageConfig;
       this.driver = new LocalStorageDriver(basePath);
-    } else if (storageConfig.provider === "s3") {
+    } else {
       const { bucket, credentials, region, forcePathStyle, endpoint } =
         storageConfig;
 
