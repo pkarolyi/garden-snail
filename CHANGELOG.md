@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/pkarolyi/garden-snail/compare/v1.5.3...v1.5.4) (2026-07-13)
+
+
+### Bug Fixes
+
+* **dependabot:** bump the non-breaking group with 2 updates ([09178bd](https://github.com/pkarolyi/garden-snail/commit/09178bd7acdb28d05f57696a7984359970f79899))
+
 ## [1.5.3](https://github.com/pkarolyi/garden-snail/compare/v1.5.2...v1.5.3) (2026-04-24)
 
 
