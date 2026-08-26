@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/pkarolyi/garden-snail/compare/v1.5.5...v1.5.6) (2026-08-26)
+
+
+### Bug Fixes
+
+* **dependabot:** bump the non-breaking group across 1 directory with 19 updates ([ef68191](https://github.com/pkarolyi/garden-snail/commit/ef68191ab024ee93a1668abc41b38bd265065374))
+
 ## [1.5.5](https://github.com/pkarolyi/garden-snail/compare/v1.5.4...v1.5.5) (2026-07-13)
 
 
