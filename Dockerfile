@@ -1,4 +1,4 @@
-FROM node:24.18.0-alpine3.24 AS base
+FROM node:26.7.0-alpine3.24 AS base
 
 RUN npm install -g --ignore-scripts pnpm@9.5.0
 
