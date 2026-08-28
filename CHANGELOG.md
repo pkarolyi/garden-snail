@@ -1,3 +1,10 @@
+## [1.5.7](https://github.com/pkarolyi/garden-snail/compare/v1.5.6...v1.5.7) (2026-08-28)
+
+
+### Bug Fixes
+
+* **dependabot:** bump node in the major group across 1 directory ([881549f](https://github.com/pkarolyi/garden-snail/commit/881549f7dbe4f509766adfd077c63c502f9dbc65))
+
 ## [1.5.6](https://github.com/pkarolyi/garden-snail/compare/v1.5.5...v1.5.6) (2026-08-26)
 
 
